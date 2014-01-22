@@ -1,4 +1,4 @@
-lib-logstash Cookbook
+Logstash Cookbook
 =====================
 Logstash is the logging service.
 
@@ -6,16 +6,17 @@ to use the logging service, include `logstash::agent` recipe in your role and se
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+### cookbooks
+- `apache2` - used as a proxy for elasticsearch
+- `bluepill` - manages the logstash service
 
-e.g.
 #### packages
-- `java` - lib-logstash needs java
+- `java` - logstash needs java
 
 Attributes
 ----------
 
-#### lib-logstash::agent
+#### logstash::agent
 <table>
   <tr>
     <th>Key</th>
@@ -55,16 +56,13 @@ Usage
     }
   },
   "run_list": [
-    "recipe[lib-logstash]"
+    "recipe[logstash]"
   ]
 }
 ```
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write you change
