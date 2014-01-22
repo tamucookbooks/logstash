@@ -1,5 +1,5 @@
-name             'lib-logstash'
-maintainer       'YOUR_COMPANY_NAME'
+name             'logstash'
+maintainer       'Texas A&M'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
 description      'Installs/Configures lib-logstash'
