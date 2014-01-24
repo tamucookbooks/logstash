@@ -14,3 +14,8 @@ logstash_filter 'sample_filter' do
   plugin 'syslog_pri'
   add_tag 'syslog'
 end
+
+logstash_output 'stdout' do
+  plugin 'stdout'
+  debug true
+end
