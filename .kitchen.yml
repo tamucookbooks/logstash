@@ -18,6 +18,9 @@ suites:
     run_list:
       - recipe[logstash]
     attributes:
+  - name: lwrp
+    run_list:
+      - recipe[logstash_test]
   - name: agent
     run_list:
       - recipe[logstash::agent]

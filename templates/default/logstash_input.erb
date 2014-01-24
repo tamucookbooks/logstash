@@ -1,7 +1,7 @@
 input {
   <%= @plugin %> {
   <% @options.each do |option, value| -%>
-    <%= option %> => <%= value %>
+    <%= option %> => "<%= value %>"
   <% end -%>
   }
 }
