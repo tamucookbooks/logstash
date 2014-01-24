@@ -10,9 +10,8 @@ when 'bluepill'
     source 'logstash.pill.erb'
     variables(
       :logstash => ::File.join(node['logstash']['dir']['bin'],
-                               "logstash-#{}-flatjar.jar"),
-      :config => ::File.join(node['logstash']['dir']['config'],
-                             "logstash.conf"),
+                               "logstash-#{node['logstash']['version']}-flatjar.jar"),
+      :config => node['logstash']['dir']['config'],
       :home => node['logstash']['home']
     )
   end
