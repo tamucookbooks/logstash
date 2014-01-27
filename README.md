@@ -2,16 +2,15 @@ Logstash Cookbook
 =====================
 Logstash is the logging service.
 
-to use the logging service, include `logstash::agent` recipe in your role and set the 'log' attribute.
+This cookbook does not add any logstash configuration files by default.  You should
+have a wrapper cookbook either drop in a single file or use the logstash lwrp
+as documented below.
 
 Requirements
 ------------
 ### cookbooks
-- `apache2` - used as a proxy for elasticsearch
 - `bluepill` - manages the logstash service
-
-#### packages
-- `java` - logstash needs java
+- `java` - installs java for logstash
 
 Attributes
 ----------
@@ -25,25 +24,94 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['log']</tt></td>
-    <td>Hash</td>
-    <td>list of log files</td>
-    <td><tt>(Syslog)</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['log'][filename]</tt></td>
-    <td>Hash</td>
-    <td>list of attributes</td>
-    <td><tt>None</tt></td>
-  </tr>
-  <tr>
-    <td><tt>['log'][filename]['type']</tt></td>
+    <td><tt>['logstash']['dir']['config']</tt></td>
     <td>String</td>
-    <td>type of log</td>
-    <td><tt>None</tt></td>
+    <td>directory to store logstash configs</td>
+    <td><tt>/etc/logstash</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['dir']['bin']</tt></td>
+    <td>String</td>
+    <td>directory to put logstash jar file in</td>
+    <td><tt>/opt/logstash</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['version']</tt></td>
+    <td>String</td>
+    <td>version of logstash to use</td>
+    <td><tt>1.2.2</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['service_provider']</tt></td>
+    <td>String</td>
+    <td>process manager to run logstash with</td>
+    <td><tt>bluepill</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['user']</tt></td>
+    <td>String</td>
+    <td>owner of logstash</td>
+    <td><tt>logstash</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['uid']</tt></td>
+    <td>Integer</td>
+    <td>uid of logstash user</td>
+    <td><tt>357</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['group']</tt></td>
+    <td>String</td>
+    <td>logstash group</td>
+    <td><tt>logstash</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['logstash']['uri']</tt></td>
+    <td>String</td>
+    <td>where to get logstash package</td>
+    <td><tt>https://download.elasticsearch.org/logstash/logstash/</tt></td>
   </tr>
 </table>
 
+Resource/Provider
+-----------------
+This cookbook provides three resource providers, all of which work very similarly.
+
+### Actions
+All providers listed below use the same two providers
+
+- **create** - creates the logstash plugin
+- **delete** - removes the logstash plugin
+
+### logstash_input
+
+#### Attributes
+
+- **plugin** - name of the plugin (ex. grok)
+- **type** - input type
+- **tags**
+- **debug**
+- **options** - plugin specific options such as community for snmptrap input
+
+### logstash_filter
+
+#### Attributes
+
+- **plugin** - name of the plugin (ex. grok)
+- **add_field**
+- **add_tag**
+- **remove_field**
+- **remove_tag**
+- **options** - plugin specific options such as locale for date filter
+
+### logstash_output
+
+#### Attributes
+
+- **plugin** - name of the plugin (ex. grok)
+- **type** - input type
+- **debug**
+- **options** - plugin specific options such as api_key for datadog output
 
 Usage
 -----
