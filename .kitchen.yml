@@ -7,14 +7,18 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+    run_list:
+      - recipe[apt]
   - name: centos-6.4
+    run_list:
+      - recipe[yum-epel]
 
 suites:
-  - name: agent
+  - name: default
     run_list:
-      - recipe[logstash::agent]
-    attributes:
-  - name: server
+      - recipe[logstash]
+    attributes: {}
+  - name: lwrp
     run_list:
-      - recipe[logstash::server]
-    attributes:
+      - recipe[logstash_test]
+    attributes: {}
