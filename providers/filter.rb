@@ -1,24 +1,20 @@
 action :create do
-  temp = 'logstash_int.erb'
-
   config = ::File.join(node['logstash']['dir']['config'],
                        "1_#{new_resource.name}.conf")
 
   all_opts = new_resource.options || {}
   %w(add_field add_tag remove_field remove_tag type).each do |opt|
     val = new_resource.send(opt)
-    unless val.nil?
-      all_opts[opt] = val
-    end
+    all_opts[opt] = val unless val.nil?
   end
 
   template config do
     source 'logstash_plugin.erb'
-    variables(:options => all_opts,
-              :plugin_type => 'filter',
-              :plugin => new_resource.plugin)
+    variables(options: all_opts,
+              plugin_type: 'filter',
+              plugin: new_resource.plugin)
     cookbook 'logstash'
-    notifies :restart, "bluepill_service[logstash]", :delayed
+    notifies :restart, 'bluepill_service[logstash]', :delayed
   end
 end
 

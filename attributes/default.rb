@@ -9,4 +9,4 @@ default['logstash']['gid'] = 357
 default['logstash']['home'] = '/var/lib/logstash'
 
 default['logstash']['version'] = '1.2.2'
-default['logstash']['uri'] = "https://download.elasticsearch.org/logstash/logstash/"
+default['logstash']['uri'] = 'https://download.elasticsearch.org/logstash/logstash/'

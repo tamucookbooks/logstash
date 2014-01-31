@@ -3,7 +3,7 @@ include_recipe 'logstash'
 logstash_input 'test_input' do
   plugin 'tcp'
   type 'syslog'
-  options(:port => '80')
+  options(port: '80')
 end
 
 logstash_input 'stdin' do
@@ -18,8 +18,8 @@ end
 logstash_filter 'grok_filter' do
   plugin 'grok'
   type 'syslog'
-  options(:pattern => "%{SYSLOGBASE}")
-  add_field ["recieved_from", "%{@source_host}"]
+  options(pattern: '%{SYSLOGBASE}')
+  add_field %w(recieved_from %{@source_host})
 end
 
 logstash_output 'stdout' do

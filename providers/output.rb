@@ -1,6 +1,4 @@
 action :create do
-  temp = 'logstash_int.erb'
-
   config = ::File.join(node['logstash']['dir']['config'],
                        "2_#{new_resource.name}.conf")
 
@@ -9,11 +7,11 @@ action :create do
 
   template config do
     source 'logstash_plugin.erb'
-    variables(:options => all_opts,
-              :plugin_type => 'output',
-              :plugin => new_resource.plugin)
+    variables(options: all_opts,
+              plugin_type: 'output',
+              plugin: new_resource.plugin)
     cookbook 'logstash'
-    notifies :restart, "bluepill_service[logstash]", :delayed
+    notifies :restart, 'bluepill_service[logstash]', :delayed
   end
 end
 

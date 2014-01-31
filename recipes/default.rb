@@ -23,7 +23,7 @@ user node['logstash']['user'] do
   gid node['logstash']['group']
   system true
   home node['logstash']['home']
-  supports :manage_home => true
+  supports manage_home: true
 end
 
 node['logstash']['dir'].each_value do |dir|
