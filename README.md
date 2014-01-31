@@ -98,6 +98,7 @@ All providers listed below use the same two providers
 #### Attributes
 
 - **plugin** - name of the plugin (ex. grok)
+- **type** - input type
 - **add_field**
 - **add_tag**
 - **remove_field**
