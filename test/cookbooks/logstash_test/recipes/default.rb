@@ -15,6 +15,13 @@ logstash_filter 'sample_filter' do
   add_tag 'syslog'
 end
 
+logstash_filter 'grok_filter' do
+  plugin 'grok'
+  type 'syslog'
+  options(:pattern => "%{SYSLOGBASE}")
+  add_field ["recieved_from", "%{@source_host}"]
+end
+
 logstash_output 'stdout' do
   plugin 'stdout'
   debug true

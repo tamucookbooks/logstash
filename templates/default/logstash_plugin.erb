@@ -1,7 +1,11 @@
 <%= @plugin_type %> {
   <%= @plugin %> {
   <% @options.each do |option, value| -%>
+    <% if value.kind_of? String -%>
     <%= option %> => "<%= value %>"
+    <% else -%>
+    <%= option %> => <%= value %>
+    <% end -%>
   <% end -%>
   }
 }

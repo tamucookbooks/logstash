@@ -5,7 +5,7 @@ action :create do
                        "1_#{new_resource.name}.conf")
 
   all_opts = new_resource.options || {}
-  %w(add_field add_tag remove_field remove_tag).each do |opt|
+  %w(add_field add_tag remove_field remove_tag type).each do |opt|
     val = new_resource.send(opt)
     unless val.nil?
       all_opts[opt] = val
