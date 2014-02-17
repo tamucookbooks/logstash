@@ -3,7 +3,6 @@ action :create do
                        "2_#{new_resource.name}.conf")
 
   all_opts = new_resource.options || {}
-  all_opts[:debug] = new_resource.debug
 
   template config do
     source 'logstash_plugin.erb'
