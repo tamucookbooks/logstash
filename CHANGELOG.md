@@ -1,13 +1,14 @@
 logstash CHANGELOG
 ======================
 
-This file is used to list changes made in each version of the lib-logstash cookbook.
+0.2.0
+-----
+- [jarosser06] - logstash use logs /var/log/logstash
+- [jarosser06] - logrotate as dependency to rotate logstash logs
+- [jarosser06] - install logstash version 1.3.3
+- [jarosser06] - fixed rubocop errors
+- [jarosser06] - removed debug as attribute for logstash_output
 
 0.1.0
 -----
 - [your_name] - Initial release of lib-logstash
-
-- - -
-Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
-
-The [Github Flavored Markdown page](http://github.github.com/github-flavored-markdown/) describes the differences between markdown on github and standard markdown.
