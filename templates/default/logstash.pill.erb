@@ -2,7 +2,7 @@ Bluepill.application('logstash') do |app|
   app.uid = '<%= @user %>'
   app.gid = '<%= @group %>'
   app.process('logstash') do |process|
-    process.start_command = 'java -jar <%=@logstash-%> agent -f <%=@config-%> -l /var/log/logstash.log'
+  process.start_command = 'java -jar <%=@logstash-%> agent -f <%=@config-%> -l <%= @log %>'
     process.pid_file = '/var/run/logstash-agent.pid'
     process.daemonize = true
     process.working_dir = '<%=@home-%>'

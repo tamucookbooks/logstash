@@ -10,6 +10,7 @@ when 'bluepill'
       logstash: ::File.join(node['logstash']['dir']['bin'],
                             "logstash-#{node['logstash']['version']}-flatjar.jar"),
       config: node['logstash']['dir']['config'],
+      log: "#{node['logstash']['dir']['log']}/logstash.log",
       user: node['logstash']['user'],
       group: node['logstash']['group'],
       home: node['logstash']['home']
@@ -21,4 +22,12 @@ when 'bluepill'
   end
 else
   Chef::Log.error("#{node['logstash']['service_provider']} is not currently supported")
+end
+
+logrotate_app 'logstash' do
+  cookbook 'logrotate'
+  path "#{node['logstash']['dir']['log']}/logstash.log"
+  frequency 'daily'
+  rotate 7
+  create "644 #{node['logstash']['user']} #{node['logstash']['group']}"
 end
