@@ -39,7 +39,7 @@ Attributes
     <td><tt>['logstash']['version']</tt></td>
     <td>String</td>
     <td>version of logstash to use</td>
-    <td><tt>1.2.2</tt></td>
+    <td><tt>1.3.3</tt></td>
   </tr>
   <tr>
     <td><tt>['logstash']['service_provider']</tt></td>
