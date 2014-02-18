@@ -10,6 +10,8 @@ when 'bluepill'
       logstash: ::File.join(node['logstash']['dir']['bin'],
                             "logstash-#{node['logstash']['version']}-flatjar.jar"),
       config: node['logstash']['dir']['config'],
+      user: node['logstash']['user'],
+      group: node['logstash']['group'],
       home: node['logstash']['home']
     )
   end

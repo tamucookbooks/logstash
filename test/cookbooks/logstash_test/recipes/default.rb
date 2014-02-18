@@ -24,5 +24,4 @@ end
 
 logstash_output 'stdout' do
   plugin 'stdout'
-  debug true
 end
