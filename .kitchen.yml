@@ -27,7 +27,7 @@ suites:
       centos-6.4
     ]
     run_list:
-      - recipe[logstash]
+      - recipe[logstash_test]
     attributes: {
       logstash: {
         service_provider: 'upstart'
