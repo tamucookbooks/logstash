@@ -14,7 +14,11 @@ action :create do
               plugin_type: 'filter',
               plugin: new_resource.plugin)
     cookbook 'logstash'
-    notifies :restart, 'bluepill_service[logstash]', :delayed
+    if node['logstash']['service_provider'] == 'bluepill'
+      notifies :restart, 'bluepill_service[logstash]', :delayed
+    else
+      notifies :restart, 'service[logstash]', :delayed
+    end
   end
 end
 

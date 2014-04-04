@@ -1,3 +1,6 @@
+logstash_bin = ::File.join(node['logstash']['dir']['bin'],
+                           "logstash-#{node['logstash']['version']}-flatjar.jar")
+
 case node['logstash']['service_provider']
 when 'bluepill'
 
@@ -7,8 +10,7 @@ when 'bluepill'
     action :create
     source 'logstash.pill.erb'
     variables(
-      logstash: ::File.join(node['logstash']['dir']['bin'],
-                            "logstash-#{node['logstash']['version']}-flatjar.jar"),
+      logstash: logstash_bin,
       config: node['logstash']['dir']['config'],
       log: "#{node['logstash']['dir']['log']}/logstash.log",
       user: node['logstash']['user'],
@@ -19,6 +21,24 @@ when 'bluepill'
 
   bluepill_service 'logstash' do
     action [:enable, :load, :start]
+  end
+when 'upstart'
+  template '/etc/init/logstash.conf' do
+    mode 0644
+    source 'logstash.upstart.erb'
+    variables(
+      logstash: logstash_bin,
+      config: node['logstash']['dir']['config'],
+      log: "#{node['logstash']['dir']['log']}/logstash.log",
+      user: node['logstash']['user'],
+      group: node['logstash']['group'],
+      home: node['logstash']['home']
+    )
+  end
+
+  service 'logstash' do
+    provider Chef::Provider::Service::Upstart
+    action [:enable, :start]
   end
 else
   Chef::Log.error("#{node['logstash']['service_provider']} is not currently supported")

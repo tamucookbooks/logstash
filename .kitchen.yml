@@ -22,3 +22,14 @@ suites:
     run_list:
       - recipe[logstash_test]
     attributes: {}
+  - name: upstart
+    excludes: [
+      centos-6.4
+    ]
+    run_list:
+      - recipe[logstash_test]
+    attributes: {
+      logstash: {
+        service_provider: 'upstart'
+        }
+      }
