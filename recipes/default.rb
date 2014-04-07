@@ -43,6 +43,7 @@ ark 'logstash' do
   checksum 'ab62394bb56da10cb20ee106badf22734402b21435977ec4f9aa65257627c629'
   version node['logstash']['version']
   prefix_root node['logstash']['install_dir']
+  prefix_home node['logstash']['install_dir']
 end
 
 include_recipe 'logstash::service'
