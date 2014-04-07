@@ -1,5 +1,4 @@
-logstash_bin = ::File.join(node['logstash']['dir']['bin'],
-                           "logstash-#{node['logstash']['version']}-flatjar.jar")
+logstash_bin = ::File.join(node['logstash']['bin_dir'], 'logstash')
 
 case node['logstash']['service_provider']
 when 'bluepill'

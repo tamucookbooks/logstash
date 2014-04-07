@@ -3,6 +3,7 @@ site :opscode
 cookbook 'bluepill'
 cookbook 'java'
 cookbook 'logrotate'
+cookbook 'ark'
 
 group :integration do
   cookbook 'apt'

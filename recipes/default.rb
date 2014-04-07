@@ -34,12 +34,15 @@ node['logstash']['dir'].each_value do |dir|
   end
 end
 
-logstash_bin = "logstash-#{node['logstash']['version']}-flatjar.jar"
+logstash_bin = "logstash-#{node['logstash']['version']}.tar.gz"
 logstash_uri = URI::join(node['logstash']['uri'],
                          logstash_bin)
 
-remote_file ::File.join(node['logstash']['dir']['bin'], logstash_bin) do
-  source logstash_uri.to_s
+ark 'logstash' do
+  url logstash_uri.to_s
+  checksum 'ab62394bb56da10cb20ee106badf22734402b21435977ec4f9aa65257627c629'
+  version node['logstash']['version']
+  prefix_root node['logstash']['install_dir']
 end
 
 include_recipe 'logstash::service'

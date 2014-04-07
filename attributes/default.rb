@@ -1,7 +1,8 @@
+default['logstash']['install_dir'] = '/opt'
+default['logstash']['bin_dir'] = '/opt/logstash/bin'
 default['logstash']['dir']['config'] = '/etc/logstash'
-default['logstash']['dir']['bin'] = '/opt/logstash'
 default['logstash']['dir']['log'] = '/var/log/logstash'
-default['logstash']['version'] = '1.3.3'
+default['logstash']['version'] = '1.4.0'
 default['logstash']['service_provider'] = 'bluepill'
 default['logstash']['user'] = 'logstash'
 default['logstash']['uid'] = 357
