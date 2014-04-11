@@ -40,6 +40,8 @@ logstash_uri = URI::join(node['logstash']['uri'],
 
 ark 'logstash' do
   url logstash_uri.to_s
+  owner node['logstash']['user']
+  group node['logstash']['user']
   checksum node['logstash']['pkg_checksum']
   version node['logstash']['version']
   prefix_root node['logstash']['install_dir']
