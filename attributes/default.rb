@@ -11,3 +11,4 @@ default['logstash']['gid'] = 357
 default['logstash']['home'] = '/var/lib/logstash'
 
 default['logstash']['uri'] = 'https://download.elasticsearch.org/logstash/logstash/'
+default['logstash']['pkg_checksum'] = 'ab62394bb56da10cb20ee106badf22734402b21435977ec4f9aa65257627c629'
