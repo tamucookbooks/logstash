@@ -4,8 +4,6 @@
 #
 # Copyright 2013, Texas A&M
 #
-# All rights reserved - Do Not Redistribute
-#
 
 require 'uri'
 
