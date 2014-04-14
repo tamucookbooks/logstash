@@ -3,7 +3,7 @@ Bluepill.application('logstash') do |app|
   app.gid = '<%= @group %>'
   app.process('logstash') do |process|
   process.start_command = '<%= @logstash -%> agent -f <%=@config-%> -l <%= @log %>'
-    process.pid_file = '/var/run/logstash-agent.pid'
+    process.pid_file = '/tmp/logstash-agent.pid'
     process.daemonize = true
     process.working_dir = '<%= @home -%>'
   end
