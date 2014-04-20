@@ -10,6 +10,7 @@ Requirements
 ------------
 ### cookbooks
 - `bluepill` - manages the logstash service
+- `ark` - used to download and unpack logstash tarball
 - `java` - installs java for logstash
 
 Attributes
@@ -45,7 +46,7 @@ Attributes
     <td><tt>['logstash']['service_provider']</tt></td>
     <td>String</td>
     <td>process manager to run logstash with</td>
-    <td><tt>bluepill</tt></td>
+    <td><tt>upstart for debian, init for rhel/suse, bluepil for else</tt></td>
   </tr>
   <tr>
     <td><tt>['logstash']['user']</tt></td>
