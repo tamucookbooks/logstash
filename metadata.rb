@@ -5,9 +5,10 @@ license          'MIT'
 description      'Installs/Configures lib-logstash'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
-supports         'ubuntu', '>= 12.04'
-supports         'centos', '>= 6.4'
-depends          'bluepill'
-depends          'java'
-depends          'logrotate'
-depends          'ark'
+%w(ubuntu centos suse).each do |os|
+  supports os
+end
+
+%w(java logrotate ark bluepill).each do |dep|
+  depends dep
+end

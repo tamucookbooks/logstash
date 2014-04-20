@@ -12,6 +12,19 @@ platforms:
   - name: centos-6.4
     run_list:
       - recipe[yum-epel]
+  - name: sles-11sp3
+    driver_config:
+      box: opscode-sles-11sp3
+    run_list:
+      - recipe[zypper]
+    attributes: {
+      java: {
+        install_flavor: 'oracle',
+        oracle: {
+          accept_oracle_download_terms: true
+          }
+        }
+      }
 
 suites:
   - name: default
@@ -22,14 +35,11 @@ suites:
     run_list:
       - recipe[logstash_test]
     attributes: {}
-  - name: upstart
-    excludes: [
-      centos-6.4
-    ]
+  - name: bluepill
     run_list:
       - recipe[logstash_test]
     attributes: {
       logstash: {
-        service_provider: 'upstart'
+        service_provider: 'bluepill'
         }
       }
