@@ -1,0 +1,61 @@
+. /lib/lsb/init-functions
+
+name="logstash"
+logstash_bin="<%= @logstash %>"
+logstash_conf="<%= @config %>"
+logstash_log="<%= @log %>"
+java_bin="/usr/bin/java"
+pid_file="/var/run/$name.pid"
+
+start () {
+        command="${logstash_bin} agent -f $logstash_conf -l ${logstash_log}"
+
+        echo -n "Starting ${name}\n"
+        /sbin/startproc -v -l $logstash_log -p "$pid_file" $command
+        pid=$(ps auxww | grep logstash | grep java | grep -v grep | awk '{print $2}')
+
+        echo $pid > $pid_file
+}
+
+stop () {
+        echo -n "Stopping ${name}\n"
+        /sbin/killproc -p $pid_file -TERM $java_bin
+}
+
+status () {
+        /sbin/checkproc -p $pid_file $java_bin
+        if [ $? == 0 ]; then
+                echo "${name} running\n"
+                return 0
+        else
+                echo "${name} not running\n"
+                return 1
+        fi
+}
+
+case $1 in
+        start)
+                if status; then exit 0; fi
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        reload)
+                stop
+                start
+                ;;
+        restart)
+                stop
+                start
+                ;;
+        status)
+                status && exit 0 || exit $?
+                ;;
+        *)
+                echo "Usage: $0 {start|stop|restart|reload|status}"
+                exit 1
+                ;;
+esac
+
+exit 0

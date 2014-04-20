@@ -23,7 +23,7 @@ when 'bluepill'
   end
 when 'upstart'
   template '/etc/init/logstash.conf' do
-    mode 0644
+    mode 0544
     source 'logstash.upstart.erb'
     variables(
       logstash: logstash_bin,
@@ -37,6 +37,32 @@ when 'upstart'
 
   service 'logstash' do
     provider Chef::Provider::Service::Upstart
+    action [:enable, :start]
+  end
+when 'init'
+  template '/etc/init.d/logstash' do
+    mode 0544
+    case node['platform_family']
+    when 'rhel'
+      source 'logstash.rhel-init.erb'
+    when 'suse'
+      source 'logstash.suse-init.erb'
+    else
+      Chef::Log.error("init not supported for #{node['platform_family']} family")
+    end
+    variables(
+      logstash: logstash_bin,
+      config: node['logstash']['dir']['config'],
+      log: "#{node['logstash']['dir']['log']}/logstash.log"
+    )
+  end
+
+  service 'logstash' do
+    if node['platform_family'] == 'suse'
+      provider Chef::Provider::Service::Insserv
+    end
+    init_command '/etc/init.d/logstash'
+    supports restart: true, status: true
     action [:enable, :start]
   end
 else
